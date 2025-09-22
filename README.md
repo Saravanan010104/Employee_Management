@@ -19,14 +19,14 @@
 ![Home Page](images/index-page.png)
 
 ### Employee Registration
-![Add Employee](addemployee.png)
+![Add Employee](images/addemployee.png)
 
 ### Records Management
-![View Employees](viewemployee.png)
+![View Employees](images/viewemployee.png)
 
 ### Search Interface
-![Search by Name](searchbyname.png)
+![Search by Name](images/searchbyname.png)
 
 ### Advanced Search Options
-![Search by DOB](searchbydob.png)
-![Search by Anniversary](searchbyanniversarydate.png)
+![Search by DOB](images/searchbydob.png)
+![Search by Anniversary](images/searchbyanniversarydate.png)
