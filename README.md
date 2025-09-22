@@ -16,7 +16,7 @@
 ## 📸 Screenshots
 
 ### Dashboard Overview
-![Home Page](index-page.png)
+![Home Page](images/index-page.png)
 
 ### Employee Registration
 ![Add Employee](addemployee.png)
