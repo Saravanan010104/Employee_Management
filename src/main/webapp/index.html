@@ -3,42 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <title>Employee Management</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
+    :root {
+        --primary: #2c3e50;
+        --secondary: #3498db;
+        --accent: #e74c3c;
+        --success: #2ecc71;
+        --warning: #f39c12;
+        --light: #ecf0f1;
+        --dark: #2c3e50;
+        --gray: #95a5a6;
+        --text: #333333;
+        --card-shadow: 0 10px 20px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+        --transition: all 0.3s ease;
     }
 
-    .header {
-        background-color: black;
-        padding: 10px 0;
-    }
-
-    ul {
-        list-style-type: none;
+    * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+    }
+
+    .navbar {
+        background: var(--primary);
+        padding: 0.8rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 1.4rem;
+    }
+
+    .navbar-brand i {
+        margin-right: 0.5rem;
+        color: var(--secondary);
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-link {
+        color: white;
+        text-decoration: none;
+        margin-left: 1.5rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0.8rem;
+        border-radius: 4px;
+        transition: var(--transition);
+    }
+
+    .nav-link i {
+        margin-right: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .nav-link:hover, .nav-link.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--secondary);
+    }
+
+    .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    @media (max-width: 992px) {
+        .navbar-nav {
+            position: fixed;
+            top: 60px;
+            left: -100%;
+            background: var(--primary);
+            width: 80%;
+            height: calc(100vh - 60px);
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 2rem;
+            transition: var(--transition);
+            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+        }
         
+        .navbar-nav.active {
+            left: 0;
+        }
+        
+        .nav-link {
+            margin: 0.5rem 0;
+            width: 100%;
+        }
+        
+        .nav-toggle {
+            display: block;
+        }
     }
 
-    li {
-        display: inline;
-        margin: 0 20px;
+    @media (max-width: 576px) {
+        .navbar {
+            padding: 0.8rem 1rem;
+        }
+        
+        .navbar-brand {
+            font-size: 1.2rem;
+        }
     }
-
 </style>
 </head>
 <body>
 
-<div class="header">
-    <ul class="nav">
-        <li><a style="color: white;text-decoration: none;font-weight: bold;font-size: 16px; " href="addemployee.jsp">Add Employee</a></li>
-        <li><a style="color: white;text-decoration: none;font-weight: bold;font-size: 16px; " href="welcome">View Employees</a></li>
-        <li><a style="color: white;text-decoration: none;font-weight: bold;font-size: 16px; " href="findemployee.jsp">Search Employee</a></li>
-        <li><a style="color: white;text-decoration: none;font-weight: bold;font-size: 16px; " href="findbydob.jsp">Search By Birthday</a></li>
-        <li><a style="color: white;text-decoration: none;font-weight: bold;font-size: 16px; " href="findbyanniversary.jsp">Search By Anniversary</a></li>    
-    </ul>
+<!-- Navigation from header.html -->
+<script>
+    // Load navigation
+    document.write(`
+        <div class="navbar">
+            <div class="navbar-brand">
+                <i class="fas fa-users"></i>
+                <span>Employee Management</span>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="navbar-nav" id="navbarNav">
+                <a href="addemployee.jsp" class="nav-link">
+                    <i class="fas fa-user-plus"></i>Add
+                </a>
+                <a href="welcome" class="nav-link">
+                    <i class="fas fa-list"></i>View
+                </a>
+                <a href="findemployee.jsp" class="nav-link">
+                    <i class="fas fa-search"></i>Search
+                </a>
+                <a href="findbydob.jsp" class="nav-link">
+                    <i class="fas fa-birthday-cake"></i>By Birthday
+                </a>
+                <a href="findbyanniversary.jsp" class="nav-link">
+                    <i class="fas fa-glass-cheers"></i>By Anniversary
+                </a>
+            </div>
+        </div>
+    `);
+</script>
+
+<div class="main-container">
+    <div class="card">
+        
+        <div class="card-body text-center">
+            <h2>Manage Your Employees Efficiently</h2>
+            <p>Select an option from the navigation menu to get started</p>
+            <div class="feature-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px;">
+                <div class="feature-card" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 200px; text-align: center;">
+                    <i class="fas fa-user-plus" style="font-size: 2.5rem; color: #3498db; margin-bottom: 15px;"></i>
+                    <h3>Add Employee</h3>
+                    <p>Add new employees to the system</p>
+                </div>
+                <div class="feature-card" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 200px; text-align: center;">
+                    <i class="fas fa-list" style="font-size: 2.5rem; color: #2ecc71; margin-bottom: 15px;"></i>
+                    <h3>View Employees</h3>
+                    <p>Browse all employee records</p>
+                </div>
+                <div class="feature-card" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 200px; text-align: center;">
+                    <i class="fas fa-search" style="font-size: 2.5rem; color: #f39c12; margin-bottom: 15px;"></i>
+                    <h3>Search</h3>
+                    <p>Find specific employees</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<script>
+    // Navigation toggle script from header.html
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navbarNav').classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('navbarNav');
+            const toggle = document.getElementById('navToggle');
+            
+            if (!nav.contains(event.target) && !toggle.contains(event.target) && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        });
+    });
+</script>
 </body>
 </html>
